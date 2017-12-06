@@ -13,7 +13,7 @@ contract userContract{
     event setBuyerRatingEvent(int newBuyerRating);
     event setSellerRatingEvent(int newSellerRating);
 
-    function carContract(string newUserID,int newBuyerRating,int newSellerRating,string newAddTime,string newEmail,string newPassword) public{
+    function userContract(string newUserID,int newBuyerRating,int newSellerRating,string newAddTime,string newEmail,string newPassword) public{
         UserID = newUserID;
         BuyerRating = newBuyerRating;
         SellerRating = newSellerRating;

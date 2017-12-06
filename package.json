@@ -1,0 +1,24 @@
+{
+  "name": "ethereumtraining",
+  "version": "1.0.0",
+  "description": "blockchain,ethereum",
+  "main": "index.js",
+  "dependencies": {
+    "ethereumjs-testrpc": "^4.0.1",
+    "solc": "^0.4.13",
+    "web3": "^0.20.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "no"
+  },
+  "keywords": [
+    "blockchain"
+  ],
+  "author": "RubyCheng",
+  "license": "MIT"
+}
