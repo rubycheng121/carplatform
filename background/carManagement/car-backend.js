@@ -48,22 +48,15 @@ app.post('/userSubmit', function(req, res) {
   var userID = req.query.id
   var password = req.query.p
   var email = req.query.e
-
+	console.log('s');
 
   deployUserContract(userID, 0, 0, Date.now(), email, password)
     .then(address => {
-      if (!err) {
+				console.log('!err deployUserContract');
         userContractAddress = address
         // initiate contract for an address
         userContractInstance = userContract.at(userContractAddress);;
 
-        var result = userContractInstance.getUserID.call()
-        console.log('getUserID:');
-        console.log(result);
-        res.json(address)
-      } else {
-        res.status(500).json(err)
-      }
     })
 })
 // const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './Contracts', ':' + 'userContract' + '.json')))

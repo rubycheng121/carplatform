@@ -12,17 +12,6 @@ function log(input) {
   logger.html(input + '\n' + logger.html())
 }
 
-// AJAX GET 方法
-// function GET(url, callback, failback) {
-//   return jQuery
-//     .ajax(url, {
-//       method: 'GET',
-//       cache: false,
-//       crossDomain: false
-//     })
-//     .done(callback)
-//     .fail(failback)
-// }
 
 // AJAX POST 方法
 function POST(url, data, callback, failback) {
@@ -45,12 +34,10 @@ $(function() {
       Password = $('#Password')
       userSubmitButton = $('#userSubmit')
       console.log(userSubmitButton)
-      // logger = $('#logger')
-      // ethBalance = $('#ethBalance')
-
 
       // 當按下存款按鍵時
       userSubmitButton.on('click', function() {
+        console.log('click userSubmitButton');
         // POST deposit?a=address&e=etherValue
         POST('./userSubmit?id=' + UserID.val() + '&e=' + Email.val() + '&p=' + Password.val(), {},
           function(res) {
