@@ -30,7 +30,7 @@ module.exports = (newSerialNumber, newLicensePlateNumber,
         data: userContract_bytecode
       }, (err, userContract) => {
         if (err) {
-          return rej(err)
+          return rej
         }
 
         if (userContract.address !== undefined && userContract.address !== null) {
