@@ -41,24 +41,28 @@
 	<input id="TransmissionSystem" type="text" placeholder="請輸入變速系統">
 	<hr>
 	<h3>事故紀錄</h3>
-	<textarea cols="50" rows="5"  onfocus="this.select()">
-		請輸入事故紀錄...
-	</textarea>
+	<form id="AccidentRecord">
+		<textarea cols="50" rows="5"  onfocus="this.select()">
+			請輸入事故紀錄...
+		</textarea>
+	</form>
 	<hr>
 	<h3>里程數</h3>
 	<input id="Mileage" type="text" placeholder="請輸入里程數">
 	<hr>
 	<h3>狀態</h3>
-	<form>
+	<form id="Status">
 		<select name="">
-			<option value="notSale">未販售</option>
-			<option value="onSale">販售中</option>
+			<option value=0>未販售</option>
+			<option value=1>販售中</option>
 		</select>
 	</form>
 	<h3>汽車售價</h3>
 	<input id="SalePrice" type="text" placeholder="請輸入汽車售價">
 	<hr>
-	<button id="submit">送出</button>
+	<button id="carSubmit">送出</button>
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/car_index.js"></script>
 </body>
 
 </html>

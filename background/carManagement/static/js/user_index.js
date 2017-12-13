@@ -42,7 +42,7 @@ $(function() {
         POST('./userSubmit?id=' + UserID.val() + '&e=' + Email.val() + '&p=' + Password.val(), {},
           function(res) {
             log(res)
-            log('註冊成功')
+            log('使用者成功')
 
           })
       })

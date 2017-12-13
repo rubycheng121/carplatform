@@ -48,16 +48,46 @@ app.post('/userSubmit', function(req, res) {
   var userID = req.query.id
   var password = req.query.p
   var email = req.query.e
-	console.log('s');
 
   deployUserContract(userID, 0, 0, Date.now(), email, password)
     .then(address => {
-				console.log('!err deployUserContract');
         userContractAddress = address
         // initiate contract for an address
         userContractInstance = userContract.at(userContractAddress);;
 
     })
+})
+
+app.post('/carSubmit', function(req, res){
+	console.log("start carSubmit");
+	const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './Contracts', ':' + 'carContract' + '.json')))
+	let carContract = web3.eth.contract(abi);
+	let carContractInstance;
+	let carContractAddress;
+  var userID = req.query.id
+	var serialNumber = req.query.sn
+	var licensePlateNumber = req.query.lpn
+	var originalPrice = req.query.op
+	var label = req.query.label
+	var automotiveType = req.query.at
+	var displacement = req.query.d
+	var fuelConsumptionH = req.query.fch
+	var fuelConsumptionS = req.query.fcs
+	var automotiveBody = req.query.ab
+	var transmissionSystem = req.query.ts
+	var accidentRecord = req.query.ar
+	var mileage = req.query.m
+	var status = req.query.s
+	var salePrice = req.query.sp
+
+	deployCarContract(userID, serialNumber, licensePlateNumber, originalPrice, label, automotiveType, displacement, fuelConsumptionH, fuelConsumptionS, automotiveBody, transmissionSystem, accidentRecord, mileage, status, salePrice)
+	.then(address => {
+		carContractAddress = address
+		console.log(address);
+		// initiate contract for an address
+		carContractInstance = carContract.at(carContractAddress);;
+	})
+	console.log("end carSubmit");
 })
 // const abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, './Contracts', ':' + 'userContract' + '.json')))
 // let userContract = web3.eth.contract(abi);
@@ -73,9 +103,11 @@ app.post('/userSubmit', function(req, res) {
 
 // 網址為根目錄時，預設回傳 index.html
 app.get('/', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'static', 'user_index.html'))
+  res.sendFile(path.resolve(__dirname, 'static', 'car_index.html'))
 })
-
+app.get('/carSubmit', function(req, res) {
+  res.sendFile(path.resolve(__dirname, 'static', 'car_index.html'))
+})
 // 沒有對應到任何 path 時，回傳 404
 app.use(function(req, res) {
   res.status(404).send('not found')
