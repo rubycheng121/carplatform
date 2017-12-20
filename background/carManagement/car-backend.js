@@ -102,12 +102,23 @@ app.post('/carSubmit', function(req, res){
 //   })
 
 // 網址為根目錄時，預設回傳 index.html
-app.get('/', function(req, res) {
+// 網址為根目錄時，預設回傳 index.html
+
+
+app.get('/car_index', function(req, res) {
   res.sendFile(path.resolve(__dirname, 'static', 'car_index.html'))
 })
 app.get('/carSubmit', function(req, res) {
   res.sendFile(path.resolve(__dirname, 'static', 'car_index.html'))
 })
+
+app.get('/user_index', function(req, res) {
+  res.sendFile(path.resolve(__dirname, 'static', 'user_index.html'))
+})
+app.get('/userSubmit', function(req, res) {
+  res.sendFile(path.resolve(__dirname, 'static', 'user_index.html'))
+})
+
 // 沒有對應到任何 path 時，回傳 404
 app.use(function(req, res) {
   res.status(404).send('not found')
