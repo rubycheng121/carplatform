@@ -1,10 +1,6 @@
 'use strict'
 
-module.exports = (newSerialNumber, newLicensePlateNumber,
-  newOriginalPrice, newLabel, newAutomotiveType,
-  newYears, newDisplacement, newFuelConsumptionH,
-  newFuelConsumptionS, newAutomotiveBody, newTransmissionSystem,
-  newAccidentRecord, newMileage, newAverageSpeed, newUserID, newStatus) => {
+module.exports = (newUserID,newAddTime,newEmail, newPassword) => {
 
   const path = require('path')
   const fs = require('fs')
@@ -20,11 +16,7 @@ module.exports = (newSerialNumber, newLicensePlateNumber,
   let userContract = web3.eth.contract(userContract_abi);
 
   return (new Promise((res, rej) => {
-    userContract.new(newSerialNumber, newLicensePlateNumber,
-      newOriginalPrice, newLabel, newAutomotiveType,
-      newYears, newDisplacement, newFuelConsumptionH,
-      newFuelConsumptionS, newAutomotiveBody, newTransmissionSystem,
-      newAccidentRecord, newMileage, newAverageSpeed, newUserID, newStatus, {
+    userContract.new(newUserID,newAddTime,newEmail, newPassword,{
         from: web3.eth.coinbase,
         gas: 88888888,
         data: userContract_bytecode

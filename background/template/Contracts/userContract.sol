@@ -12,15 +12,17 @@ contract userContract{
 
     event setBuyerRatingEvent(int newBuyerRating);
     event setSellerRatingEvent(int newSellerRating);
+    event userContractEvent(string newUserID_e,int newBuyerRating_e,int newSellerRating_e,string newAddTime_e,string newEmail_e,string newPassword_e,address UserAddress_e);
 
-    function userContract(string newUserID,int newBuyerRating,int newSellerRating,string newAddTime,string newEmail,string newPassword) public{
+    function userContract(string newUserID,string newAddTime,string newEmail,string newPassword) public{
         UserID = newUserID;
-        BuyerRating = newBuyerRating;
-        SellerRating = newSellerRating;
+        BuyerRating = 0;
+        SellerRating = 0;
         AddTime = newAddTime;
         Email = newEmail;
         Password = newPassword;
         UserAddress = this;
+        userContractEvent(newUserID,0,0,AddTime,Email,Password,this);
     }
 
     // function carContract() public{

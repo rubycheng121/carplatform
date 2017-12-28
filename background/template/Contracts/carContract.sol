@@ -13,7 +13,6 @@ contract carContract {
     int[] FuelConsumptionAvg;
     int FuelConsumptionH;
     int FuelConsumptionS;
-    string AutomotiveBody;
     string TransmissionSystem;
     string AccidentRecord;
     int Mileage;
@@ -36,8 +35,8 @@ contract carContract {
     string VehicleEquippedField;
 
     event carContractEventOne(string newSerialNumber,string newLicensePlateNumber,int newOriginalPrice,string newLabel,string newAutomotiveType,string newYears,int newDisplacement,int newFuelConsumptionH,int newFuelConsumptionS);
-    event carContractEventTwo(string newSerialNumber,string newAutomotiveBody,string newTransmissionSystem,string newAccidentRecord,int newMileage,int newAverageSpeed,string newUserID,address newUserAddress,bool newStatus);
-    //event carContractEventone(string newSerialNumber,string newLicensePlateNumber,int newOriginalPrice,string newLabel,string newAutomotiveType,string newYears,int newDisplacement,int newFuelConsumptionH,int newFuelConsumptionS,string newAutomotiveBody,string newTransmissionSystem,string newAccidentRecord,int newMileage,int newAverageSpeed);
+    event carContractEventTwo(string newSerialNumber,string newTransmissionSystem,string newAccidentRecord,int newMileage,int newAverageSpeed,string newUserID,address newUserAddress,bool newStatus);
+    //event carContractEventone(string newSerialNumber,string newLicensePlateNumber,int newOriginalPrice,string newLabel,string newAutomotiveType,string newYears,int newDisplacement,int newFuelConsumptionH,int newFuelConsumptionS,string newTransmissionSystem,string newAccidentRecord,int newMileage,int newAverageSpeed);
     event setLicensePlateNumberEvent(string newLicensePlateNumber);
     event setuploadFuelConsumptionDataEvent(bytes3 newMaintainTime,int newFuelConsumptionAvg);
     event setAccidentRecordEvent(string newAccidentRecord);
@@ -60,7 +59,7 @@ contract carContract {
     event setVehicleEquippedFieldEvent(string newVehicleEquippedField);
 
     /* this runs when the contract is executed */
-    function carContract(string newSerialNumber,string newLicensePlateNumber,int newOriginalPrice,string newLabel,string newAutomotiveType,string newYears,int newDisplacement,int newFuelConsumptionH,int newFuelConsumptionS,string newAutomotiveBody,string newTransmissionSystem,string newAccidentRecord,int newMileage,int newAverageSpeed,string newUserID,bool newStatus) public {
+    function carContract(string newSerialNumber,string newLicensePlateNumber,int newOriginalPrice,string newLabel,string newAutomotiveType,string newYears,int newDisplacement,int newFuelConsumptionH,int newFuelConsumptionS,string newTransmissionSystem,string newAccidentRecord,int newMileage,int newAverageSpeed,string newUserID,bool newStatus) public {
         SerialNumber = newSerialNumber;
         LicensePlateNumber = newLicensePlateNumber;
         OriginalPrice = newOriginalPrice;
@@ -70,7 +69,6 @@ contract carContract {
         Displacement = newDisplacement;
         FuelConsumptionH = newFuelConsumptionH;
         FuelConsumptionS = newFuelConsumptionS;
-        AutomotiveBody = newAutomotiveBody;
         TransmissionSystem = newTransmissionSystem;
         AccidentRecord = newAccidentRecord;
         Mileage = newMileage;
@@ -79,8 +77,8 @@ contract carContract {
         UserAddress = this;
         Status = newStatus;
         carContractEventOne(SerialNumber,LicensePlateNumber,OriginalPrice,Label,AutomotiveType,Years,Displacement,FuelConsumptionH,FuelConsumptionS);
-        carContractEventTwo(SerialNumber,AutomotiveBody,TransmissionSystem,AccidentRecord,Mileage,AverageSpeed,UserID,UserAddress,Status);
-        //carContractEventone(SerialNumber,LicensePlateNumber,OriginalPrice,Label,AutomotiveType,Years,Displacement,FuelConsumptionH,FuelConsumptionS,AutomotiveBody,TransmissionSystem,AccidentRecord,Mileage,AverageSpeed);
+        carContractEventTwo(SerialNumber,TransmissionSystem,AccidentRecord,Mileage,AverageSpeed,UserID,UserAddress,Status);
+        //carContractEventone(SerialNumber,LicensePlateNumber,OriginalPrice,Label,AutomotiveType,Years,Displacement,FuelConsumptionH,FuelConsumptionS,TransmissionSystem,AccidentRecord,Mileage,AverageSpeed);
     }
     // function carContracttest() public {
     //     SerialNumber = 'newSerialNumber';
@@ -92,7 +90,6 @@ contract carContract {
     //     Displacement = 100;
     //     FuelConsumptionH = 100;
     //     FuelConsumptionS = 100;
-    //     AutomotiveBody = 'newAutomotiveBody';
     //     TransmissionSystem = 'newTransmissionSystem';
     //     AccidentRecord = 'newAccidentRecord';
     //     Mileage = 100;
