@@ -7,6 +7,7 @@ const provider = "http://localhost:8545"
 
 // 用於處理路徑
 var path = require('path')
+var eventEmitter = require('./eventEmitter.js')
 
 //用於存取資料庫
 var mysql = require('mysql');
@@ -68,24 +69,9 @@ app.post('/userSubmit', function(req, res) {
 
       console.log(userContractAddress);
       userContractInstance = userContract.at(userContractAddress);;
-      // var filter = userContractInstance.userContractEvent({
-      //   newUserID: userID
-      // }, function(error, result) {
-      //   if (!error)
-      //     console.log(result);
-      // });
-      // console.log(userContractInstance);
-      // var post = {
-      //   UserID: userID,
-      //   BuyerRating: 0,
-      //   SellerRating: 0,
-      //   Email: email,
-      //   Password: password,
-      //   UserAddress: userContractAddress
-      // };
-      // console.log(post);
 
-      var theEvent = userContractInstance.allEvents({
+
+      var theEvent = userContractInstance.userContractEvent({
         from: web3.eth.accounts[0]
       });
       theEvent.watch(function(err, event) {
@@ -101,6 +87,7 @@ app.post('/userSubmit', function(req, res) {
             Password: event.args.newPassword_e,
             UserAddress: event.args.UserAddress_e
           };
+          // res.json(post)
           var query = connection.query('INSERT INTO user_information SET ?', post, function(error, results, fields) {
             if (error) throw error;
             // Neat!
@@ -111,19 +98,11 @@ app.post('/userSubmit', function(req, res) {
 
           theEvent.stopWatching();
 
-          // eth.filter('pending', function(err, txhash) {
-          //   console.log(txhash); // pending tx
-          //   eth.filter('latest', function(err, blockhash) {
-          //     eth.getBlock(blockhash, function(err, block) {
-          //       // filter the tx from this block
-          //       var tx = block.transactions
-          //         .filter(function(tx) {
-          //           return tx === txhash;
-          //         })[0];
-          //       console.log(tx); // show this tx (has been mined)
-          //     });
-          //   });
-          // });
+          res.json({
+            address: 'sss',
+            ethBalance: 9999,
+            bankBalance: 8888
+          })
 
         } else {
           console.log(err);
@@ -134,10 +113,20 @@ app.post('/userSubmit', function(req, res) {
       // initiate contract for an address
 
     })
-    .then(userContractInstance => {
 
-    })
 })
+
+app.post('/transfer', function(req, res) {
+  var from = req.query.f
+  var to = req.query.t
+  var etherValue = req.query.e
+
+  res.json({
+    user: 'ss'
+  })
+})
+
+
 
 app.post('/carSubmit', function(req, res) {
   console.log("start carSubmit");
@@ -187,13 +176,27 @@ app.post('/carSubmit', function(req, res) {
 // 網址為根目錄時，預設回傳 index.html
 // 網址為根目錄時，預設回傳 index.html
 
+// 取得以太帳戶們
+app.get('/accounts', function (req, res) {
+	eth.getAccounts(function (err, accounts) {
+    console.log(accounts);
+		if (!err) {
+      console.log('sss');
+			res.json(accounts)
+      console.log('dddd');
+		} else {
+			console.log(err)
+			res.status(500).json(err)
+		}
+	})
+})
 
 app.get('/', function(req, res) {
   res.sendFile(path.resolve(__dirname, 'static', 'index.html'))
 })
-app.get('/Submit', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'static', 'index.html'))
-})
+// app.get('/Submit', function(req, res) {
+//   res.sendFile(path.resolve(__dirname, 'static', 'index.html'))
+// })
 
 // 沒有對應到任何 path 時，回傳 404
 app.use(function(req, res) {

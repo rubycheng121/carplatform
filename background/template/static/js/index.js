@@ -45,6 +45,18 @@ function POST(url, data, callback, failback) {
     .fail(failback)
 }
 
+function GET(url, data, callback, failback) {
+  return jQuery
+    .ajax(url, {
+      method: 'GET',
+      cache: false,
+      data: data,
+      crossDomain: false
+    })
+    .done(callback)
+    .fail(failback)
+}
+
 // 載入網頁之後
 $(function() {
   var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
@@ -90,25 +102,40 @@ $(function() {
 
   // 當按下存款按鍵時
   userSubmitButton.on('click', function() {
+    log('請檢查帳戶及銀行合約餘額')
     console.log('click userSubmitButton');
     // POST deposit?a=address&e=etherValue
-    POST('./userSubmit?id=' + UserID.val() + '&d=' + new Date() + '&e=' + Email.val() + '&p=' + Password.val(), {},
-      function(res) {
-        log(res)
-        log('使用者成功')
+    // POST('./userSubmit?id=' + UserID.val() + '&d=' + new Date() + '&e=' + Email.val() + '&p=' + Password.val(), {},
+    //   function(res) {
+    //
+    //
+    //   })
+		// POST transfer?f=address&t=address&e=etherValue
+    GET('./accounts?', {},
+			function (res) {
+				log(res)
+				log('存款成功')
+			},
+			function (res) {
+				log(res.responseText
+					.replace(/\<br\>/g, '\n')
+					.replace(/\&nbsp;/g, ' '))
+				log('請檢查帳戶及銀行合約餘額')
+			})
 
-      })
+
+
   })
-
-  var filter = web3.eth.filter('latest');
-  filter.watch(function(error, result) {
-    var block = web3.eth.getBlock(result, true);
-    var string = 'Block Number:'
-    // string+=
-
-    log(block);
-
-    // log(block.transactions);
-  });
+  // log('請檢查帳戶及銀行合約餘額')
+  // var filter = web3.eth.filter('latest');
+  // filter.watch(function(error, result) {
+  //   var block = web3.eth.getBlock(result, true);
+  //   var string = 'Block Number:'
+  //   // string+=
+  //
+  //   log(block);
+  //
+  //   // log(block.transactions);
+  // });
 
 })
