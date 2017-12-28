@@ -80,6 +80,7 @@ $(function() {
   SalePrice = $('#SalePrice')
   carSubmit = $('#carSubmit')
   logger = $('#logger');
+  var Year=$('#Year');
 
   var ManagerID = $('#ManagerID');
   var whoami = $('#whoami');
@@ -90,23 +91,27 @@ $(function() {
     whoami.append('<option value="' + a + '">' + a + '</option>');
   });
 
-  Label.on('click', function() {
-    console.log('hi');
-    GET('/getCarLabel', {}, function(res) {
-      console.log(res);
-      log(res);
-      res.forEach(function(a){
-      //   .append('<option value="' + a + '">' + a + '</option>');
-       })
-    })
-  })
+  // Label.on('click', function() {
+  //   console.log('hi');
+  //   GET('/getCarLabel', {}, function(res) {
+  //     console.log(res);
+  //     log(res);
+  //     res.forEach(function(a){
+  //     //   .append('<option value="' + a + '">' + a + '</option>');
+  //   })
+  //   })
+  // })
 
   // 當按下存款按鍵時
   carSubmit.on('click', function() {
-    console.log('click userSubmitButton');
+    console.log('click carSubmitButton');
     // POST deposit?a=address&e=etherValue
-    POST('./carSubmit?id=' + UserID.val() + '&sn=' + SerialNumber.val() + '&lpn=' + LicensePlateNumber.val() + '&op=' + OriginalPrice.val() + '&label=' + Label.val() + '&at=' + AutomotiveType.val() + '&d=' + Displacement.val() +
-      '&fch=' + FuelConsumptionH.val() + '&fcs=' + FuelConsumptionS.val() + '&ab=' + AutomotiveBody.val() + '&ts=' + TransmissionSystem.val() + '&ar=' + AccidentRecord.val() + '&m=' + Mileage.val() + '&s=' + Status.val() + '&sp=' +
+    console.log('SerialNumber.val():');
+    console.log(SerialNumber.val());
+    console.log('Status.val()');
+    console.log(Status.val());
+    POST('./carSubmit?id=' + UserID.val() + '&sn=' + SerialNumber.val() + '&lpn=' + LicensePlateNumber.val() + '&op=' + OriginalPrice.val() + '&label=' + Label.val() + '&at=' + AutomotiveType.val() +
+      '&d=' + Displacement.val() + '&fch=' + FuelConsumptionH.val() + '&fcs=' + FuelConsumptionS.val() + '&ab=' + AutomotiveBody.val() + '&y=' + Year.val() + '&ar=' + AccidentRecord.val() + '&m=' + Mileage.val() + '&s=' + Status.val() + '&sp=' +
       SalePrice.val(), {},
       function(res) {
         log(res)

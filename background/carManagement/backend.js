@@ -149,20 +149,88 @@ app.post('/carSubmit', function(req, res) {
   var fuelConsumptionH = req.query.fch
   var fuelConsumptionS = req.query.fcs
   var automotiveBody = req.query.ab
-  var transmissionSystem = req.query.ts
   var accidentRecord = req.query.ar
   var mileage = req.query.m
   var status = req.query.s
   var salePrice = req.query.sp
+  var years = req.query.y
+  var averageSpeed = 0
 
-  deployCarContract(userID, serialNumber, licensePlateNumber, originalPrice, label, automotiveType, displacement, fuelConsumptionH, fuelConsumptionS, automotiveBody, transmissionSystem, accidentRecord, mileage, status, salePrice)
+  console.log(req.query);
+  console.log('mileage');
+  console.log(mileage);
+  deployCarContract(serialNumber, licensePlateNumber, originalPrice, label,
+      automotiveType, years, displacement, fuelConsumptionH, fuelConsumptionS,
+        accidentRecord, mileage, averageSpeed,
+      userID, status,salePrice)
     .then(address => {
       carContractAddress = address
       console.log(address);
-      // initiate contract for an address
-      connection.connect();
 
-      carContractInstance = carContract.at(carContractAddress);;
+      carContractInstance = carContract.at(carContractAddress);
+      var theEvent = carContractInstance.allEvents({
+        from: web3.eth.accounts[0]
+      });
+      var carContractEventOne
+      var carContractEventTwo
+      var sucess
+      let post = {
+        CarAddress:carContractAddress
+      }
+      theEvent.watch(function(err, event) {
+        if (!err) {
+          console.log(event.args);
+          if (event.event == 'finishEvent') {
+            success = event.args.success
+              post.SerialNumber = serialNumber
+              post.LicensePlateNumber = licensePlateNumber
+              post.OriginalPrice = originalPrice
+              post.Label = label
+              post.AutomotiveType = automotiveType
+              post.Years = years
+              post.Displacement = displacement
+              post.FuelConsumptionH = fuelConsumptionH
+              post.FuelConsumptionL = fuelConsumptionS
+              post.AccidentRecord = accidentRecord
+              post.Mileage = mileage
+              post.UserID = userID
+              post.maintainAddress = event.args.maintainAddress_e
+              post.AverageSpeed=averageSpeed
+              post.Status=status
+              post.SalePrice=salePrice
+
+            console.log(post);
+            theEvent.stopWatching();
+
+            var connection = mysql.createConnection(config);
+            var query = connection.query('INSERT INTO car_information SET ?', post, function(error, results, fields) {
+              if (error) {
+                console.log(query.sql);
+                console.log(error);
+                connection.end();
+                res.json(error)
+              } else {
+                console.log(query.sql); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
+                connection.end();
+                res.json(post)
+              }
+
+            // throw error;
+
+            });
+          }
+
+
+
+
+        } else {
+          console.log(err);
+        }
+      });
+
+
+      // initiate contract for an address
+
     })
   console.log("end carSubmit");
 })

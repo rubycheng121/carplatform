@@ -18,7 +18,6 @@ contract carContract {
     int Mileage;
     int AverageSpeed;
     string UserID;
-    address UserAddress;
     bool Status;
     int SalePrice;
 
@@ -34,8 +33,9 @@ contract carContract {
     string FiveOilWaterLightInspectionField;
     string VehicleEquippedField;
 
-    event carContractEventOne(string newSerialNumber,string newLicensePlateNumber,int newOriginalPrice,string newLabel,string newAutomotiveType,string newYears,int newDisplacement,int newFuelConsumptionH,int newFuelConsumptionS);
-    event carContractEventTwo(string newSerialNumber,string newTransmissionSystem,string newAccidentRecord,int newMileage,int newAverageSpeed,string newUserID,address newUserAddress,bool newStatus);
+    event finishEvent(bool success ,address maintainAddress_e);
+    event carContractEventOne(string newSerialNumber_e,string newLicensePlateNumber_e,int newOriginalPrice_e,string newLabel_e,string newAutomotiveType_e,string newYears_e,int newDisplacement_e,int newFuelConsumptionH_e,int newFuelConsumptionS_e);
+    event carContractEventTwo(string newSerialNumber_e,string newTransmissionSystem_e,string newAccidentRecord_e,int newMileage_e,int newAverageSpeed_e,string newUserID_e,address newUserAddress_e,bool newStatus_e);
     //event carContractEventone(string newSerialNumber,string newLicensePlateNumber,int newOriginalPrice,string newLabel,string newAutomotiveType,string newYears,int newDisplacement,int newFuelConsumptionH,int newFuelConsumptionS,string newTransmissionSystem,string newAccidentRecord,int newMileage,int newAverageSpeed);
     event setLicensePlateNumberEvent(string newLicensePlateNumber);
     event setuploadFuelConsumptionDataEvent(bytes3 newMaintainTime,int newFuelConsumptionAvg);
@@ -59,7 +59,10 @@ contract carContract {
     event setVehicleEquippedFieldEvent(string newVehicleEquippedField);
 
     /* this runs when the contract is executed */
-    function carContract(string newSerialNumber,string newLicensePlateNumber,int newOriginalPrice,string newLabel,string newAutomotiveType,string newYears,int newDisplacement,int newFuelConsumptionH,int newFuelConsumptionS,string newTransmissionSystem,string newAccidentRecord,int newMileage,int newAverageSpeed,string newUserID,bool newStatus) public {
+    function carContract(string newSerialNumber,string newLicensePlateNumber,int newOriginalPrice,string newLabel,string newAutomotiveType,string newYears,int newDisplacement,int newFuelConsumptionH
+    ,int newFuelConsumptionS,string newTransmissionSystem,string newAccidentRecord
+    ,int newMileage,int newAverageSpeed,string newUserID,bool newStatus,int newSalePrice) public {
+
         SerialNumber = newSerialNumber;
         LicensePlateNumber = newLicensePlateNumber;
         OriginalPrice = newOriginalPrice;
@@ -74,11 +77,11 @@ contract carContract {
         Mileage = newMileage;
         AverageSpeed = newAverageSpeed;
         UserID = newUserID;
-        UserAddress = this;
         Status = newStatus;
-        carContractEventOne(SerialNumber,LicensePlateNumber,OriginalPrice,Label,AutomotiveType,Years,Displacement,FuelConsumptionH,FuelConsumptionS);
-        carContractEventTwo(SerialNumber,TransmissionSystem,AccidentRecord,Mileage,AverageSpeed,UserID,UserAddress,Status);
-        //carContractEventone(SerialNumber,LicensePlateNumber,OriginalPrice,Label,AutomotiveType,Years,Displacement,FuelConsumptionH,FuelConsumptionS,TransmissionSystem,AccidentRecord,Mileage,AverageSpeed);
+        SalePrice=newSalePrice;
+        finishEvent(true,msg.sender);
+        // carContractEventOne(newSerialNumber,newLicensePlateNumber,newOriginalPrice,newLabel,newAutomotiveType,newYears_e,newDisplacement,newFuelConsumptionH,newFuelConsumptionS);        //carContractEventone(SerialNumber,LicensePlateNumber,OriginalPrice,Label,AutomotiveType,Years,Displacement,FuelConsumptionH,FuelConsumptionS,TransmissionSystem,AccidentRecord,Mileage,AverageSpeed);
+        // carContractEventTwo(newSerialNumber,newTransmissionSystem,newAccidentRecord,newMileage,newAverageSpeed,newUserID,newUserAddress,newStatus);
     }
     // function carContracttest() public {
     //     SerialNumber = 'newSerialNumber';
@@ -194,14 +197,7 @@ contract carContract {
         setUserIDEvent(newUserID);
     }
 
-    function getUserAddress() constant returns(address){
-        return UserAddress;
-    }
 
-    function setUserAddress(address newUserAddress){
-        UserAddress = newUserAddress;
-        setUserAddressEvent(newUserAddress);
-    }
 
     function getStatus() constant returns(bool){
         return Status;
