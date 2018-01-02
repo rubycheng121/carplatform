@@ -81,7 +81,6 @@ $(function() {
   carSubmit = $('#carSubmit')
   logger = $('#logger');
   var Year=$('#Year');
-
   var ManagerID = $('#ManagerID');
   var whoami = $('#whoami');
 
@@ -138,23 +137,14 @@ $(function() {
         log(res)
 
       })
-    // POST transfer?f=address&t=address&e=etherValue
-
-    // eth.getAccounts(function (err, accounts) {
-    //   console.log(accounts);
-    // 	if (!err) {
-    //     console.log('sss');
-    // 		log(accounts)
-    //     console.log('dddd');
-    // 	} else {
-    // 		console.log(err)
-    // 		log(500).json(err)
-    // 	}
-    // })
-
-
-
+      // GET('./accounts' , {},
+      //   function(res) {
+      //     log(res)
+      //
+      //   })
   })
+
+
   // log('請檢查帳戶及銀行合約餘額')
   // var filter = web3.eth.filter('latest');
   // filter.watch(function(error, result) {

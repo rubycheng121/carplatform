@@ -234,7 +234,7 @@ app.post('/carSubmit', function(req, res) {
     })
   console.log("end carSubmit");
 })
-// 取得已註冊帳戶們
+// 取得已註冊汽車們
 app.get('/getCarLabel', function(req, res) {
   var connection = mysql.createConnection(config);
   connection.query('SELECT * FROM carplatform.car_label;', function(error, results, fields) {
@@ -245,6 +245,19 @@ app.get('/getCarLabel', function(req, res) {
     res.json(carLabels)
   });
 })
+
+app.get('/getCarAddress', function(req, res) {
+  var connection = mysql.createConnection(config);
+  connection.query('SELECT * FROM carplatform.car_information;', function(error, results, fields) {
+    var carList = [];
+    results.forEach(function(element) {
+      carList.push(element.CarAddress);
+    });
+    console.log(carList);
+    res.json(carList)
+  });
+})
+
 
 // 網址為根目錄時，預設回傳 index.html
 // 網址為根目錄時，預設回傳 index.html
@@ -270,25 +283,25 @@ app.get('/', function(req, res) {
 app.get('/index', function(req, res) {
   res.sendFile(path.resolve(__dirname, 'static', 'index.html'))
 })
-app.get('/manageCar', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'static', 'manageCar.html'))
+app.get('/RegisterUser', function(req, res) {
+  res.sendFile(path.resolve(__dirname, 'static', 'index.html'))
 })
 app.get('/RegisterCar', function(req, res) {
   res.sendFile(path.resolve(__dirname, 'static', 'RegisterCar.html'))
 })
-app.get('/Submit', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'static', 'index.html'))
+app.get('/MaintainCar', function(req, res) {
+  res.sendFile(path.resolve(__dirname, 'static', 'MaintainCar.html'))
 })
-app.get('/Userlist', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'static', 'Userlist.html'))
+app.get('/MaintainUser', function(req, res) {
+  res.sendFile(path.resolve(__dirname, 'static', 'MaintainUser.html'))
 })
-app.get('/Userlist', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'static', 'Userlist.html'))
-})
+// app.get('/Userlist', function(req, res) {
+//   res.sendFile(path.resolve(__dirname, 'static', 'Userlist.html'))
+// })
 
-app.post('/', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'static', 'index.html'))
-});
+// app.post('/', function(req, res) {
+//   res.sendFile(path.resolve(__dirname, 'static', 'index.html'))
+// });
 
 
 //
@@ -303,7 +316,7 @@ app.use(function(req, res) {
 
 
 // 聆聽 3030 port
-app.listen(3000)
+app.listen(3030)
 
 
 module.exports = app;
