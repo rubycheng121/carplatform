@@ -41,11 +41,11 @@
       <div class="navbar-collapse collapse">
         <div class="menu">
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="/index">Register User</a></li>
-            <li role="presentation"><a href="/RegisterCar">Register Car</a></li>
-            <li role="presentation"><a href="/ManageCar">Manage Car</a></li>
-            <li role="presentation"><a href="/UserList">User List</a></li>
-            <li role="presentation"><a href="/contact">Contact</a></li>
+            <li role="presentation" ><a href="/RegisterUser">Register User</a></li>
+            <li role="presentation" class="active"><a href="/RegisterCar">Register Car</a></li>
+            <li role="presentation"><a href="/ManageCar">Maintain Car</a></li>
+            <li role="presentation"><a href="/MaintainUserInfo">Maintain UserInfo</a></li>
+
           </ul>
         </div>
       </div>
@@ -67,57 +67,118 @@
     <div class="container">
       <div class="center">
         <h2>  </h2>
-        <h2>註冊新車資訊</h2>
-
+        <h2>註冊新成員</h2>
 
       </div>
       <div class="row contact-wrap">
         <div class="status alert alert-success" style="display: none"></div>
-        <form id="main-contact-form" class="contact-form" name="contact-form" method="post">
+        <form id="main-contact-form" class="contact-form" name="contact-form" method="post" action="/RegisterCar">
           <div class="col-sm-5 col-sm-offset-1">
             <div class="form-group">
               <label>權限</label>
               <select id="whoami" name="whoami" class="form-control" required="required">
-                <%=accounts%>
+                <%var options = accounts
+                for ( var i = 0; i < accounts.length; i++ )
+                {%>
+                  <option value="<%=accounts[i]%>"><%=accounts[i] %></option>
+                <%
+                }
+                %>
               </select>
+
             </div>
             <div class="form-group">
               <label>所有人身分證字號 </label>
-              <input id="UserID" type="text" class="form-control" placeholder="請輸入所有人身分證字號" required="required">
+              <input id="UserID"  name="UserID" type="text" class="form-control" placeholder="請輸入所有人身分證字號" required="required">
             </div>
             <div class="form-group">
               <label>引擎序號</label>
-              <input id="SerialNumber" type="text" class="form-control" placeholder="請輸入序號" required="required">
+              <input id="SerialNumber"  name="SerialNumber" type="text" class="form-control" placeholder="請輸入序號" required="required">
             </div>
             <div class="form-group">
               <label>車牌 </label>
-              <input id="LicensePlateNumber" type="text" class="form-control" placeholder="請輸入車牌" required="required">
+              <input id="LicensePlateNumber"  name="LicensePlateNumber" type="text" class="form-control" placeholder="請輸入車牌" required="required">
             </div>
             <div class="form-group">
               <label>原廠售價 </label>
-              <input id="OriginalPrice" type="text" class="form-control" placeholder="請輸入原廠售價" required="required">
+              <input id="OriginalPrice"  name="OriginalPrice" type="text" class="form-control" placeholder="請輸入原廠售價" required="required">
             </div>
             <div class="form-group">
               <label>廠牌 </label>
-              <select id="Label" type="text" class="form-control" placeholder="請輸入廠牌" required="required">
+              <select id="Label"  name="Label" type="text" class="form-control" placeholder="請輸入廠牌" required="required">
                 <option value='請選擇廠牌'>請選擇廠牌</option>
+                <option value='Acura' >Acura</option>
+                <option value='Alfa Romeo' >Alfa Romeo</option>
+                <option value='Aston Martin' >Aston Martin</option>
+                <option value='Audi' >Audi</option>
+                <option value='Bentley' >Bentley</option>
+                <option value='BMW' >BMW</option>
+                <option value='Bugatti' >Bugatti</option>
+                <option value='Buick' >Buick</option>
+                <option value='Cadillac' >Cadillac</option>
+                <option value='Chevrolet' >Chevrolet</option>
+                <option value='Chrysler' >Chrysler</option>
+                <option value='Citroen' >Citroen</option>
+                <option value='Dodge' >Dodge</option>
+                <option value='Ferrari' >Ferrari</option>
+                <option value='Fiat' >Fiat</option>
+                <option value='Ford' >Ford</option>
+                <option value='Geely' >Geely</option>
+                <option value='General' >General Motors</option>
+                <option value='GMC' >GMC</option>
+                <option value='Honda' >Honda</option>
+                <option value='Hyundai' >Hyundai</option>
+                <option value='Infiniti' >Infiniti</option>
+                <option value='Jaguar' >Jaguar</option>
+                <option value='Jeep' >Jeep</option>
+                <option value='Kia' >Kia</option>
+                <option value='Koenigsegg' >Koenigsegg</option>
+                <option value='Lamborghini' >Lamborghini</option>
+                <option value='Land Rover' >Land Rover</option>
+                <option value='Lexus' >Lexus</option>
+                <option value='Maserati' >Maserati</option>
+                <option value='Mazda' >Mazda</option>
+                <option value='McLaren' >McLaren</option>
+                <option value='Mercedes' >Mercedes-Benz</option>
+                <option value='Mini' >Mini</option>
+                <option value='Mitsubishi' >Mitsubishi</option>
+                <option value='Nissan' >Nissan</option>
+                <option value='Pagani' >Pagani</option>
+                <option value='Peugeot' >Peugeot</option>
+                <option value='Porsche' >Porsche</option>
+                <option value='Ram' >Ram</option>
+                <option value='Renault' >Renault</option>
+                <option value='Rolls Royce' >Rolls Royce</option>
+                <option value='Saab' >Saab</option>
+                <option value='Subaru' >Subaru</option>
+                <option value='Suzuki' >Suzuki</option>
+                <option value='Tata Motors' >Tata Motors</option>
+                <option value='Tesla' >Tesla</option>
+                <option value='Toyota' >Toyota</option>
+                <option value='Volkswagen' >Volkswagen</option>
+                <option value='Volvo' >Volvo</option>
+
               </select>
             </div>
             <div class="form-group">
-              <label>車型 </label>
-              <input id="AutomotiveType" class="form-control" type="text" placeholder="請輸入車型" required="required">
+              <label>變速系統 </label>
+              <select id="AutomotiveType"  name="AutomotiveType" class="form-control" type="text" placeholder="請輸入車型" required="required">
+                <option value='手排' >手排</option>
+                <option value='自排' >自排</option>
+                <option value='手自排' >手自排</option>
+              </select>
             </div>
             <div class="form-group">
-              <label>出廠年份 </label>
-              <input id="Displacement" class="form-control" type="text" placeholder="請輸入出廠年份" required="required">
+              <label>C.C.數 </label>
+              <input id="Displacement"  name="Displacement" class="form-control" type="text" placeholder="請輸入C.C數" required="required">
             </div>
             <div class="form-group">
               <label>油耗(高速) </label>
-              <input id="FuelConsumptionH" class="form-control" type="text" placeholder="請輸入油耗(高速)" required="required">
+              <input id="FuelConsumptionH"  name="FuelConsumptionH" class="form-control" type="text" placeholder="請輸入油耗(高速)" required="required">
             </div>
             <div class="form-group">
               <label>油耗(市區) </label>
-              <input id="FuelConsumptionS" class="form-control" type="text" placeholder="請輸入油耗(市區)" required="required">
+              <input id="FuelConsumptionS"  name="FuelConsumptionS" class="form-control" type="text" placeholder="請輸入油耗(市區)" required="required">
             </div>
 
 
@@ -130,40 +191,42 @@
             <div class="form-group">
               <div class="form-group">
                 <label>車身型式 </label>
-                <input id="AutomotiveBody" class="form-control" type="text" placeholder="請輸入車身型式" required="required">
+                <select id="AutomotiveBody"   name="AutomotiveBody" class="form-control" type="text" placeholder="請輸入車身型式" required="required">
+                  <option value='轎車' >轎車</option>
+                  <option value='兩門' >兩門</option>
+                  <option value='四門' >四門</option>
+                </select>
               </div>
               <div class="form-group">
-                <label>變速系統 </label>
-                <input id="TransmissionSystem" class="form-control" type="text" placeholder="請輸入變速系統" required="required">
+                <label>年份 </label>
+                <input id="Year" name="Year"  class="form-control" type="text" placeholder="請輸入出廠年份" required="required">
               </div>
               <div class="form-group">
                 <label>事故紀錄 </label>
-                <form id="AccidentRecord">
-                  <input type="text" class="form-control" placeholder="請輸入事故紀錄" required="required">
+                <form >
+                  <input id="AccidentRecord"  name="AccidentRecord" type="text" class="form-control" placeholder="請輸入事故紀錄" required="required">
                 </form>
               </div>
               <div class="form-group">
                 <label>里程數 </label>
-                <input id="Mileage" type="text" class="form-control" placeholder="請輸入里程數" required="required">
+                <input id="Mileage" name="Mileage" type="text" class="form-control" placeholder="請輸入里程數" required="required">
               </div>
               <div class="form-group">
                 <label>狀態 </label>
-                <form id="Status">
-                  <select name="" class="form-control">
-                  <option value=0>未販售</option>
-                  <option value=1>販售中</option>
+                  <select id="carStatus" name="carStatus"  class="form-control" required="required">
+                  <option value='false'>未販售</option>
+                  <option value='true'>販售中</option>
                 </select>
-                </form>
               </div>
               <div class="form-group">
                 <label>汽車售價 </label>
-                <input id="SalePrice" type="text" class="form-control" placeholder="請輸入汽車售價">
+                <input id="SalePrice" name="SalePrice" type="text" class="form-control" placeholder="請輸入汽車售價">
               </div>
-              <button id="userSubmit" type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Submit</button>
+              <button id="carSubmit" name="carSubmit" type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Submit</button>
             </div>
             <div class="form-group">
               <label>活動紀錄 *</label>
-              <textarea id="logger" name="message" id="message" required="required" class="form-control" rows="8"></textarea>
+              <textarea id="logger" name="message" id="message" class="form-control" rows="8"><%=message %></textarea>
             </div>
           </div>
 
@@ -239,9 +302,10 @@
   </footer>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- <script src="./js/jquery.min.js"></script> -->
   <script src="js/jquery-2.1.1.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/index.js"></script>
+  <!-- <script src="js/index.js"></script> -->
   <script src='js/web3.min.js'></script>
   <!-- <script src="js/bootstrap.min.js"></script> -->
   <!-- <script src="js/wow.min.js"></script> -->

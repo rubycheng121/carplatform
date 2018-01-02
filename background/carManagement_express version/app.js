@@ -5,8 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/RegisterUser');
-var RegisterCar = require('./routes/RegisterCar');
+// var index = require('./routes/RegisterUser');
+// var RegisterCar = require('./routes/RegisterCar');
 
 
 var app = express();
@@ -45,10 +45,9 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/', require('./routes/RegisterUser'));
-app.use('/index', require('./routes/RegisterUser'));
+app.use('/', require('./routes/index'));
 app.use('/RegisterCar', require('./routes/RegisterCar'));
-app.use('/RegisterUser', require('./routes/RegisterUser'));
+app.use('/RegisterUser', require('./routes/index'));
 // app.use('/login2', require('./routes/login2'));
 // app.use('/UPDcoursesignals', require('./routes/UPDcoursesignals'));
 // app.use('/showUnits', require('./routes/showUnits'));
