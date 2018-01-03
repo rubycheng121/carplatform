@@ -48,6 +48,8 @@ app.use(function(req, res, next) {
 app.use('/', require('./routes/index'));
 app.use('/RegisterCar', require('./routes/RegisterCar'));
 app.use('/RegisterUser', require('./routes/index'));
+app.use('/MaintainCar', require('./routes/MaintainCar'));
+app.use('/MaintainCarSubmit', require('./routes/MaintainCarSubmit'));
 // app.use('/login2', require('./routes/login2'));
 // app.use('/UPDcoursesignals', require('./routes/UPDcoursesignals'));
 // app.use('/showUnits', require('./routes/showUnits'));

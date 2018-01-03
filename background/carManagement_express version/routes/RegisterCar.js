@@ -74,10 +74,10 @@ router.post('/', function(req, res) {
         console.log('carContract_ADDRESS', carContract.address)
         post.CarAddress = carContract.address
 
-        // carContractInstance = carContract.at(carContractAddress);
         var theEvent = carContract.allEvents({
           from: managerID
         });
+
         theEvent.watch(function(err, event) {
           if (err) {
             submitCser(res, err.toString())
@@ -97,12 +97,13 @@ router.post('/', function(req, res) {
                 post.AccidentRecord = accidentRecord
                 post.Mileage = mileage
                 post.UserID = userID
-                // post.maintainAddress = event.args.maintainAddress_e
+                post.maintainAddress = managerID
                 post.AverageSpeed = averageSpeed
                 post.Status = status
                 post.SalePrice = salePrice
+                post.AutomotiveBody = automotiveBody
 
-                console.log(req.body.carStatus);
+                // console.log(req.body.carStatus);
                 theEvent.stopWatching();
 
 
@@ -112,8 +113,14 @@ router.post('/', function(req, res) {
                     console.log(query.sql);
                     console.log(error);
                     connection.end();
-                    submitUser(res, error.toString())
+                    submitCar(res, error.toString())
                   } else {
+                    carContract.setAutomotiveBody(automotiveBody, {
+                      from: managerID,
+                      gas: 88888888
+                    }, (err, txhash) => {
+
+                    })
 
                     console.log(query.sql); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
                     connection.end();
@@ -128,6 +135,11 @@ router.post('/', function(req, res) {
           }
 
         })
+
+
+
+        // carContractInstance = carContract.at(carContractAddress);
+
       }
     })
 })

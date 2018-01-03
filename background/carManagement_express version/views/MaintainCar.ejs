@@ -41,9 +41,9 @@
       <div class="navbar-collapse collapse">
         <div class="menu">
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="/RegisterUser">Register User</a></li>
+            <li role="presentation"><a href="/RegisterUser">Register User</a></li>
             <li role="presentation"><a href="/RegisterCar">Register Car</a></li>
-            <li role="presentation"><a href="/MaintainCar">Maintain Car</a></li>
+            <li role="presentation" class="active"><a href="/MaintainCar">Maintain Car</a></li>
             <li role="presentation"><a href="/MaintainUserInfo">Maintain UserInfo</a></li>
 
           </ul>
@@ -67,13 +67,31 @@
     <div class="container">
       <div class="center">
         <h2>  </h2>
-        <h2>註冊新成員</h2>
+        <h2>維護汽車資訊</h2>
 
       </div>
       <div class="row contact-wrap">
         <div class="status alert alert-success" style="display: none"></div>
-        <form id="main-contact-form" class="contact-form" name="contact-form" method="post" action="/RegisterUser">
-          <div class="col-sm-5 col-sm-offset-1">
+
+        <div class="col-sm-5 col-sm-offset-1">
+          <form id="main-contact-form" class="contact-form" name="form1" method="post" action="/MaintainCar">
+            <div class="form-group">
+              <label>Car Address</label>
+              <select id="carlist" name="carlist" class="form-control">
+                <%
+                for ( var i = 0; i < carlist.length; i++ )
+                {%>
+                  <option value="<%=carlist[i]%>" name="<%=carlist[i]%>"  <% if (i == SelectedNum) { %>selected<% } %> ><%=carlist[i] %></option>
+                <%
+                }
+                %>
+              </select>
+              <button id="loadCarSubmit" type="submit" class="btn btn-primary btn-lg">load Car Address</button>
+              <!-- <select id="whoami" class="form-control" required="required"></select> -->
+
+            </div>
+          </form>
+            <form id="main-contact-form" class="contact-form" name="form2" method="post" action="/MaintainCarSubmit">
             <div class="form-group">
               <label>權限</label>
               <select id="whoami" name="whoami" class="form-control" required="required">
@@ -87,32 +105,94 @@
               </select>
 
             </div>
+            <%if (CarAddress!=''){%>
             <div class="form-group">
-              <label>身分證字號</label>
-              <input id="UserID" name="UserID" type="text" placeholder="請輸入身分證字號" class="form-control" required="required">
+              <label>CarAddress </label>
+              <input id="CarAddress" name="CarAddress" value="<%=CarAddress%>" type="text" class="form-control"  disabled >
+            </div>
+            <%}%>
+            <div class="form-group">
+              <label>所有人身分證字號 </label>
+
+              <input id="UserID" name="UserID" type="text"  value="<%=Data.UserID%>"  class="form-control" <% if (Selected == false) { %> disabled <% } %>>
             </div>
             <div class="form-group">
-              <label>E-mail</label>
-              <input id="Email" name="Email" type="email" placeholder="請輸入信箱" name="email" class="form-control" required="required">
+              <label>引擎序號</label>
+              <input id="SerialNumber" name="SerialNumber" type="text" value="<%=Data.SerialNumber%>"  class="form-control" disabled>
             </div>
             <div class="form-group">
-              <label>密碼</label>
-              <input id="Password" name="Password" type="password" class="form-control" placeholder="請輸入密碼">
+              <label>車牌</label>
+              <input id="LicensePlateNumber" neme="LicensePlateNumber" type="text" value="<%=Data.LicensePlateNumber%>"  class="form-control" <% if (Selected == false) { %> disabled <% } %>>
+            </div>
+            <div class="form-group">
+              <label>原廠售價 </label>
+              <input id="OriginalPrice" name="OriginalPrice" type="text" value="<%=Data.OriginalPrice%>" class="form-control" disabled>
+            </div>
+            <div class="form-group">
+              <label>廠牌 </label>
+              <input id="Label" name="Label" type="text" value="<%=Data.Label%>" class="form-control" disabled>
+            </div>
+            <div class="form-group">
+              <label>變速系統 </label>
+              <input id="AutomotiveType" name="AutomotiveType" type="text" value="<%=Data.AutomotiveType%>" class="form-control" disabled>
+            </div>
+            <div class="form-group">
+              <label>C.C.數 </label>
+              <input id="Displacement" name="Displacement" class="form-control" value="<%=Data.Displacement%>" type="text" disabled>
+            </div>
+            <div class="form-group">
+              <label>油耗(高速) </label>
+              <input id="FuelConsumptionH" name="FuelConsumptionH" value="<%=Data.FuelConsumptionH%>" class="form-control" type="text" disabled>
+            </div>
+            <div class="form-group">
+              <label>油耗(市區) </label>
+              <input id="FuelConsumptionS" name="FuelConsumptionS" value="<%=Data.FuelConsumptionL%>" class="form-control" type="text" disabled>
+            </div>
+
+
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group">
+            <div class="form-group">
+              <label>車身型式 </label>
+              <input id="AutomotiveBody" name="AutomotiveBody" value="<%=Data.AutomotiveBody%>" class="form-control" type="text" disabled>
+            </div>
+            <div class="form-group">
+              <label>年份 </label>
+              <input id="Year" name="Year" value="<%=Data.Years%>" class="form-control" type="text" disabled>
+            </div>
+            <div class="form-group">
+              <label>事故紀錄 </label>
+
+                <input id="AccidentRecord" name="AccidentRecord" type="text" class="form-control" <% if (Selected == false) { %> disabled <% } %>>
+
+            </div>
+            <div class="form-group">
+              <label>里程數 </label>
+              <input id="Mileage" name="Mileage" type="text" class="form-control" <% if (Selected == false) { %> disabled <% } %>>
+            </div>
+            <div class="form-group">
+              <label>狀態 </label>
+
+                <select id="Status" name="Status" class="form-control" <% if (Selected == false) { %> disabled <% } %>>
+                  <option value='false'>未販售</option>
+                  <option value='true'>販售中</option>
+                </select>
+
+            </div>
+            <div class="form-group">
+              <label>汽車售價 </label>
+              <input id="SalePrice" name="SalePrice" type="text"  value="<%=Data.SalePrice%>" class="form-control"  <% if (Selected == false) { %> disabled <% } %>>
+            </div>
+            <div class="form-group">
+              <button id="maintainCarSubmit" type="submit" class="btn btn-primary btn-lg">Submit</button>
             </div>
           </div>
-          <div class="col-sm-5">
-            <!-- <div class="form-group">
-              <label>Subject *</label>
-              <input type="text" name="subject" class="form-control" required="required">
-            </div> -->
-            <div class="form-group">
-              <button id="userSubmit" type="submit" class="btn btn-primary btn-lg">Submit</button>
-            </div>
-            <div class="form-group">
-              <label>活動紀錄 *</label>
-              <textarea id="logger" name="message" id="message" class="form-control" rows="8"><%=message %></textarea>
-            </div>
+          <div class="form-group">
+            <label>活動紀錄 *</label>
+            <textarea id="logger" name="message" id="message" class="form-control" rows="8"><%=message%></textarea>
           </div>
+        </div>
 
         </form>
       </div>
@@ -127,7 +207,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4 f-about">
-            <a href="index.html"><h1><span>Blockchain - Car platform</span></h1></a>
+            <a href="/index"><h1><span>Blockchain - Car platform</span></h1></a>
             <p>汽車的重要資訊直接上區塊鏈，在買賣汽車時買家可以相信區塊鏈上的資料為參考而購買汽車，另外履歷也可用在當事故發生時釐清事故原因的重要資料
             </p>
           </div>

@@ -13,13 +13,14 @@ contract carContract {
     int[] FuelConsumptionAvg;
     int FuelConsumptionH;
     int FuelConsumptionS;
-    /* string TransmissionSystem; */
+    string TransmissionSystem;
     string AccidentRecord;
     int Mileage;
     int AverageSpeed;
     string UserID;
     bool Status;
     int SalePrice;
+    string AutomotiveBody;
 
     string BubbleWaterCheckField;
     string SteeringWheelBodyCheck;
@@ -35,7 +36,7 @@ contract carContract {
 
     event finishEvent(bool success ,address maintainAddress_e);
     event carContractEventOne(string newSerialNumber_e,string newLicensePlateNumber_e,int newOriginalPrice_e,string newLabel_e,string newAutomotiveType_e,string newYears_e,int newDisplacement_e,int newFuelConsumptionH_e,int newFuelConsumptionS_e);
-    event carContractEventTwo(string newSerialNumber_e,string newAccidentRecord_e,int newMileage_e,int newAverageSpeed_e,string newUserID_e,address newUserAddress_e,bool newStatus_e);
+    event carContractEventTwo(string newSerialNumber_e,string newTransmissionSystem_e,string newAccidentRecord_e,int newMileage_e,int newAverageSpeed_e,string newUserID_e,address newUserAddress_e,bool newStatus_e);
     //event carContractEventone(string newSerialNumber,string newLicensePlateNumber,int newOriginalPrice,string newLabel,string newAutomotiveType,string newYears,int newDisplacement,int newFuelConsumptionH,int newFuelConsumptionS,string newTransmissionSystem,string newAccidentRecord,int newMileage,int newAverageSpeed);
     event setLicensePlateNumberEvent(string newLicensePlateNumber);
     event setuploadFuelConsumptionDataEvent(bytes3 newMaintainTime,int newFuelConsumptionAvg);
@@ -60,8 +61,8 @@ contract carContract {
 
     /* this runs when the contract is executed */
     function carContract(string newSerialNumber,string newLicensePlateNumber,int newOriginalPrice,string newLabel,string newAutomotiveType,string newYears,int newDisplacement,int newFuelConsumptionH
-    ,int newFuelConsumptionS,string newAccidentRecord
-    ,int newMileage,int newAverageSpeed,string newUserID,bool newStatus,int newSalePrice) public {
+    ,int newFuelConsumptionS,string newTransmissionSystem,string newAccidentRecord
+    ,int newMileage,int newAverageSpeed,string newUserID,bool newStatus,int newSalePrice ) public {
 
         SerialNumber = newSerialNumber;
         LicensePlateNumber = newLicensePlateNumber;
@@ -72,7 +73,7 @@ contract carContract {
         Displacement = newDisplacement;
         FuelConsumptionH = newFuelConsumptionH;
         FuelConsumptionS = newFuelConsumptionS;
-        /* TransmissionSystem = newTransmissionSystem; */
+        TransmissionSystem = newTransmissionSystem;
         AccidentRecord = newAccidentRecord;
         Mileage = newMileage;
         AverageSpeed = newAverageSpeed;
@@ -83,24 +84,13 @@ contract carContract {
         // carContractEventOne(newSerialNumber,newLicensePlateNumber,newOriginalPrice,newLabel,newAutomotiveType,newYears_e,newDisplacement,newFuelConsumptionH,newFuelConsumptionS);        //carContractEventone(SerialNumber,LicensePlateNumber,OriginalPrice,Label,AutomotiveType,Years,Displacement,FuelConsumptionH,FuelConsumptionS,TransmissionSystem,AccidentRecord,Mileage,AverageSpeed);
         // carContractEventTwo(newSerialNumber,newTransmissionSystem,newAccidentRecord,newMileage,newAverageSpeed,newUserID,newUserAddress,newStatus);
     }
-    // function carContracttest() public {
-    //     SerialNumber = 'newSerialNumber';
-    //     LicensePlateNumber = 'newLicensePlateNumber';
-    //     OriginalPrice = 100;
-    //     Label = 'newLabel';
-    //     AutomotiveType = 'newAutomotiveType';
-    //     Years = 'newYears';
-    //     Displacement = 100;
-    //     FuelConsumptionH = 100;
-    //     FuelConsumptionS = 100;
-    //     TransmissionSystem = 'newTransmissionSystem';
-    //     AccidentRecord = 'newAccidentRecord';
-    //     Mileage = 100;
-    //     AverageSpeed = 100;
-    //     UserID = 'newUserID';
-    //     UserAddress= this;
-    // }
+    function setAutomotiveBody(string newAutomotiveBody){
+        AutomotiveBody =newAutomotiveBody;
+    }
 
+    function getAutomotiveBody() constant returns(string){
+        return AutomotiveBody;
+    }
     /*  function */
     function getSerialNumber() constant returns (string){
         return SerialNumber;
@@ -158,9 +148,9 @@ contract carContract {
         return FuelConsumptionS;
     }
 
-    /* function getTransmissionSystem() constant returns(string){
+    function getTransmissionSystem() constant returns(string){
         return TransmissionSystem;
-    } */
+    }
 
     function getAccidentRecord() constant returns(string){
         return AccidentRecord;
