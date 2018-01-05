@@ -92,6 +92,7 @@
             </div>
           </form>
             <form id="main-contact-form" class="contact-form" name="form2" method="post" action="/MaintainCarSubmit">
+              <div name="selectedCarAddress"style="visibility:hidden"><% if (Selected == true) { %><=%selectedCarAddress%>Hi<%}%></div>
             <div class="form-group">
               <label>權限</label>
               <select id="whoami" name="whoami" class="form-control" required="required">
@@ -108,73 +109,58 @@
             <%if (CarAddress!=''){%>
             <div class="form-group">
               <label>CarAddress </label>
-              <input id="CarAddress" name="CarAddress" value="<%=CarAddress%>" type="text" class="form-control"  disabled >
+              <input id="CarAddress" name="CarAddress" value="<%=CarAddress%>" type="text" class="form-control"  readonly="readonly" >
             </div>
             <%}%>
             <div class="form-group">
               <label>所有人身分證字號 </label>
-
-              <input id="UserID" name="UserID" type="text"  value="<%=Data.UserID%>"  class="form-control" <% if (Selected == false) { %> disabled <% } %>>
+              <input id="UserID" name="UserID" type="text"  value="<%=Data.UserID%>"  class="form-control" readonly="readonly">
             </div>
             <div class="form-group">
               <label>引擎序號</label>
-              <input id="SerialNumber" name="SerialNumber" type="text" value="<%=Data.SerialNumber%>"  class="form-control" disabled>
+              <input id="SerialNumber" name="SerialNumber" type="text" value="<%=Data.SerialNumber%>"  class="form-control" readonly="readonly">
             </div>
             <div class="form-group">
               <label>車牌</label>
-              <input id="LicensePlateNumber" neme="LicensePlateNumber" type="text" value="<%=Data.LicensePlateNumber%>"  class="form-control" <% if (Selected == false) { %> disabled <% } %>>
+              <input id="LicensePlateNumber" neme="LicensePlateNumber" type="text" value="<%=Data.LicensePlateNumber%>"  class="form-control" readonly="readonly">
             </div>
             <div class="form-group">
               <label>原廠售價 </label>
-              <input id="OriginalPrice" name="OriginalPrice" type="text" value="<%=Data.OriginalPrice%>" class="form-control" disabled>
+              <input id="OriginalPrice" name="OriginalPrice" type="text" value="<%=Data.OriginalPrice%>" class="form-control" readonly="readonly">
             </div>
             <div class="form-group">
               <label>廠牌 </label>
-              <input id="Label" name="Label" type="text" value="<%=Data.Label%>" class="form-control" disabled>
+              <input id="Label" name="Label" type="text" value="<%=Data.Label%>" class="form-control" readonly="readonly">
             </div>
             <div class="form-group">
               <label>變速系統 </label>
-              <input id="AutomotiveType" name="AutomotiveType" type="text" value="<%=Data.AutomotiveType%>" class="form-control" disabled>
+              <input id="AutomotiveType" name="AutomotiveType" type="text" value="<%=Data.AutomotiveType%>" class="form-control" readonly="readonly">
             </div>
             <div class="form-group">
               <label>C.C.數 </label>
-              <input id="Displacement" name="Displacement" class="form-control" value="<%=Data.Displacement%>" type="text" disabled>
+              <input id="Displacement" name="Displacement" class="form-control" value="<%=Data.Displacement%>" type="text" readonly="readonly">
             </div>
             <div class="form-group">
               <label>油耗(高速) </label>
-              <input id="FuelConsumptionH" name="FuelConsumptionH" value="<%=Data.FuelConsumptionH%>" class="form-control" type="text" disabled>
+              <input id="FuelConsumptionH" name="FuelConsumptionH" value="<%=Data.FuelConsumptionH%>" class="form-control" type="text" readonly="readonly">
             </div>
             <div class="form-group">
               <label>油耗(市區) </label>
-              <input id="FuelConsumptionS" name="FuelConsumptionS" value="<%=Data.FuelConsumptionL%>" class="form-control" type="text" disabled>
+              <input id="FuelConsumptionS" name="FuelConsumptionS" value="<%=Data.FuelConsumptionL%>" class="form-control" type="text" readonly="readonly">
             </div>
-
-
-        </div>
-        <div class="col-sm-5">
-          <div class="form-group">
             <div class="form-group">
               <label>車身型式 </label>
-              <input id="AutomotiveBody" name="AutomotiveBody" value="<%=Data.AutomotiveBody%>" class="form-control" type="text" disabled>
+              <input id="AutomotiveBody" name="AutomotiveBody" value="<%=Data.AutomotiveBody%>" class="form-control" type="text" readonly="readonly">
             </div>
             <div class="form-group">
               <label>年份 </label>
-              <input id="Year" name="Year" value="<%=Data.Years%>" class="form-control" type="text" disabled>
+              <input id="Year" name="Year" value="<%=Data.Years%>" class="form-control" type="text" readonly="readonly">
             </div>
-            <div class="form-group">
-              <label>事故紀錄 </label>
 
-                <input id="AccidentRecord" name="AccidentRecord" type="text" class="form-control" <% if (Selected == false) { %> disabled <% } %>>
-
-            </div>
-            <div class="form-group">
-              <label>里程數 </label>
-              <input id="Mileage" name="Mileage" type="text" class="form-control" <% if (Selected == false) { %> disabled <% } %>>
-            </div>
             <div class="form-group">
               <label>狀態 </label>
 
-                <select id="Status" name="Status" class="form-control" <% if (Selected == false) { %> disabled <% } %>>
+                <select id="Status" name="Status" class="form-control" readonly="readonly">
                   <option value='false'>未販售</option>
                   <option value='true'>販售中</option>
                 </select>
@@ -182,15 +168,77 @@
             </div>
             <div class="form-group">
               <label>汽車售價 </label>
-              <input id="SalePrice" name="SalePrice" type="text"  value="<%=Data.SalePrice%>" class="form-control"  <% if (Selected == false) { %> disabled <% } %>>
+              <input id="SalePrice" name="SalePrice" type="text"  value="<%=Data.SalePrice%>" class="form-control"  readonly="readonly">
             </div>
+            <div class="form-group">
+              <label>事故紀錄 </label>
+
+                <textarea id="AccidentRecord" name="AccidentRecord" type="text" class="form-control" readonly="readonly" ><%=Data.AccidentRecord%></textarea>
+
+            </div>
+            <div class="form-group">
+              <label>里程數 </label>
+              <input id="Mileage" value="<%=Data.Mileage%>"name="Mileage" type="text" class="form-control" <% if (Selected == false) { %> readonly="readonly" <% } %>>
+            </div>
+
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group">
+
+
+            <% if (Selected == true) { %>
+            <div class="form-group">
+              <label>泡水檢查結果</label>
+              <input value="正常"  name="BubbleWaterCheckField" type="text" class="form-control" >
+            </div>
+            <div class="form-group">
+              <label>方向盤本體檢查結果</label>
+              <input value="正常"  name="SteeringWheelBodyCheck" type="text" class="form-control" >
+            </div>
+            <div class="form-group">
+              <label>啟動馬達本體本體檢查結果</label>
+              <input value="正常"  name="MotorBodyCheck" type="text" class="form-control" >
+            </div>
+            <div class="form-group">
+              <label>引擎本體檢查結果</label>
+              <input value="正常"  name="EngineBodyCheckField" type="text" class="form-control" >
+            </div>
+            <div class="form-group">
+              <label>車身外觀檢查結果</label>
+              <input value="正常"  name="VehicleExterior" type="text" class="form-control" >
+            </div>
+            <div class="form-group">
+              <label>變速箱本體檢查結果</label>
+              <input value="正常"  name="TransmissionBodyCheckField" type="text" class="form-control" >
+            </div>
+            <div class="form-group">
+              <label>引擎號碼外觀檢查結果</label>
+              <input value="正常"  name="EngineNumberField" type="text" class="form-control" >
+            </div>
+            <div class="form-group">
+              <label>重大事故狀況檢查結果</label>
+              <input value="正常"  name="MajorAccidentCheckField" type="text" class="form-control" >
+            </div>
+            <div class="form-group">
+              <label>路試狀況檢查結果</label>
+              <input value="正常"   name="RoadStatusCheck" type="text" class="form-control" >
+            </div>
+            <div class="form-group">
+              <label>五油三水及燈光檢查結果</label>
+              <input value="正常"  name="FiveOilWaterLightInspectionField" type="text" class="form-control" >
+            </div>
+            <div class="form-group">
+              <label>車輛配備檢查結果</label>
+              <input value="正常"  name="VehicleEquippedField" type="text" class="form-control" >
+            </div>
+            <%}%>
             <div class="form-group">
               <button id="maintainCarSubmit" type="submit" class="btn btn-primary btn-lg">Submit</button>
             </div>
           </div>
           <div class="form-group">
             <label>活動紀錄 *</label>
-            <textarea id="logger" name="message" id="message" class="form-control" rows="8"><%=message%></textarea>
+            <textarea id="logger" name="message" id="message" class="form-control" rows="20"><%=message%></textarea>
           </div>
         </div>
 

@@ -22,17 +22,23 @@ contract carContract {
     int SalePrice;
     string AutomotiveBody;
 
-    string BubbleWaterCheckField;
-    string SteeringWheelBodyCheck;
-    string MotorBodyCheck;
-    string EngineBodyCheckField;
-    string VehicleExterior;
-    string TransmissionBodyCheckField;
-    string EngineNumberField;
-    string MajorAccidentCheckField;
-    string RoadStatusCheck;
-    string FiveOilWaterLightInspectionField;
-    string VehicleEquippedField;
+
+
+    struct maintainInfo{
+        string BubbleWaterCheckField;
+        string SteeringWheelBodyCheck;
+        string MotorBodyCheck;
+        string EngineBodyCheckField;
+        string VehicleExterior;
+        string TransmissionBodyCheckField;
+        string EngineNumberField;
+        string MajorAccidentCheckField;
+        string RoadStatusCheck;
+        string FiveOilWaterLightInspectionField;
+        string VehicleEquippedField;
+    }
+    uint[] maintainTime;
+    mapping (uint=>maintainInfo) maintainInfos;
 
     event finishEvent(bool success ,address maintainAddress_e);
     event carContractEventOne(string newSerialNumber_e,string newLicensePlateNumber_e,int newOriginalPrice_e,string newLabel_e,string newAutomotiveType_e,string newYears_e,int newDisplacement_e,int newFuelConsumptionH_e,int newFuelConsumptionS_e);
@@ -47,17 +53,6 @@ contract carContract {
     event setUserAddressEvent(address setUserAddress);
     event setStatusEvent(bool newStatus);
     event setSalePriceEvent(int newSalePrice);
-    event setBubbleWaterCheckFieldEvent(string newBubbleWaterCheckField);
-    event setSteeringWheelBodyCheckEvent(string newSteeringWheelBodyCheck);
-    event setMotorBodyCheckEvent(string newMotorBodyCheck);
-    event setEngineBodyCheckFieldEvent(string newEngineBodyCheckField);
-    event setVehicleExteriorEvent(string newVehicleExterior);
-    event setTransmissionBodyCheckFieldEvent(string newTransmissionBodyCheckField);
-    event setEngineNumberFieldEvent(string newEngineNumberField);
-    event setMajorAccidentCheckFieldEvent(string newMajorAccidentCheckField);
-    event setRoadStatusCheckEvent(string newRoadStatusCheck);
-    event setFiveOilWaterLightInspectionFieldEvent(string newFiveOilWaterLightInspectionField);
-    event setVehicleEquippedFieldEvent(string newVehicleEquippedField);
 
     /* this runs when the contract is executed */
     function carContract(string newSerialNumber,string newLicensePlateNumber,int newOriginalPrice,string newLabel,string newAutomotiveType,string newYears,int newDisplacement,int newFuelConsumptionH
@@ -188,7 +183,6 @@ contract carContract {
     }
 
 
-
     function getStatus() constant returns(bool){
         return Status;
     }
@@ -206,103 +200,62 @@ contract carContract {
         SalePrice = newSalePrice;
         setSalePriceEvent(newSalePrice);
     }
-    //
-    function getBubbleWaterCheckField() constant returns(string){
-        return BubbleWaterCheckField;
-    }
-
-    function setBubbleWaterCheckField(string newBubbleWaterCheckField){
-        BubbleWaterCheckField = newBubbleWaterCheckField;
-        setBubbleWaterCheckFieldEvent(newBubbleWaterCheckField);
-    }
-
-    function getSteeringWheelBodyCheck() constant returns(string){
-        return SteeringWheelBodyCheck;
-    }
-
-    function setSteeringWheelBodyCheck(string newSteeringWheelBodyCheck){
-        SteeringWheelBodyCheck = newSteeringWheelBodyCheck;
-        setSteeringWheelBodyCheckEvent(newSteeringWheelBodyCheck);
-    }
-
-    function getMotorBodyCheck() constant returns(string){
-        return MotorBodyCheck;
-    }
-
-    function setMotorBodyCheck(string newMotorBodyCheck){
-        MotorBodyCheck = newMotorBodyCheck;
-        setMotorBodyCheckEvent(newMotorBodyCheck);
-    }
-
-    function getEngineBodyCheckField() constant returns(string){
-        return EngineBodyCheckField;
-    }
-
-    function setEngineBodyCheckField(string newEngineBodyCheckField){
-        EngineBodyCheckField = newEngineBodyCheckField;
-        setEngineBodyCheckFieldEvent(newEngineBodyCheckField);
-    }
-
-    function getVehicleExterior() constant returns(string){
-        return  VehicleExterior;
-    }
-
-    function setVehicleExterior(string newVehicleExterior){
-        VehicleExterior = newVehicleExterior;
-        setVehicleExteriorEvent(newVehicleExterior);
-    }
-
-    function getTransmissionBodyCheckField() constant returns(string){
-        return TransmissionBodyCheckField;
-    }
-
-    function setTransmissionBodyCheckField(string newTransmissionBodyCheckField){
-        TransmissionBodyCheckField = newTransmissionBodyCheckField;
-        setTransmissionBodyCheckFieldEvent(newTransmissionBodyCheckField);
-    }
-
-    function getEngineNumberField() constant returns(string){
-        return EngineNumberField;
-    }
-
-    function setEngineNumberField(string newEngineNumberField){
-        EngineNumberField = newEngineNumberField;
-        setEngineNumberFieldEvent(newEngineNumberField);
-    }
-
-    function getMajorAccidentCheckField() constant returns(string){
-        return MajorAccidentCheckField;
-    }
-
-    function setMajorAccidentCheckField(string newMajorAccidentCheckField){
-        MajorAccidentCheckField = newMajorAccidentCheckField;
-        setMajorAccidentCheckFieldEvent(newMajorAccidentCheckField);
-    }
-
-    function getRoadStatusCheck() constant returns(string){
-        return RoadStatusCheck;
-    }
-
-    function setRoadStatusCheck(string newRoadStatusCheck){
-        RoadStatusCheck = newRoadStatusCheck;
-        setRoadStatusCheckEvent(newRoadStatusCheck);
-    }
-
-    function getFiveOilWaterLightInspectionField() constant returns(string){
-        return FiveOilWaterLightInspectionField;
-    }
-
-    function setFiveOilWaterLightInspectionField(string newFiveOilWaterLightInspectionField){
-        FiveOilWaterLightInspectionField = newFiveOilWaterLightInspectionField;
-        setFiveOilWaterLightInspectionFieldEvent(newFiveOilWaterLightInspectionField);
-    }
-
-    function getVehicleEquippedField() constant returns(string){
-        return VehicleEquippedField;
-    }
-
-    function setVehicleEquippedField(string newVehicleEquippedField){
-        VehicleEquippedField = newVehicleEquippedField;
-        setVehicleEquippedFieldEvent(newVehicleEquippedField);
-    }
+     function maintainCarInfo (string BubbleWaterCheckField,
+        string SteeringWheelBodyCheck,
+        string MotorBodyCheck,
+        string EngineBodyCheckField,
+        string VehicleExterior,
+        string TransmissionBodyCheckField,
+        string EngineNumberField,
+        string MajorAccidentCheckField,
+        string RoadStatusCheck,
+        string FiveOilWaterLightInspectionField,
+        string VehicleEquippedField) {
+            uint time=now;
+            maintainTime.push(time);
+            maintainInfos[time].BubbleWaterCheckField=BubbleWaterCheckField;
+            maintainInfos[time].SteeringWheelBodyCheck=SteeringWheelBodyCheck;
+            maintainInfos[time].MotorBodyCheck=MotorBodyCheck;
+            maintainInfos[time].EngineBodyCheckField=EngineBodyCheckField;
+            maintainInfos[time].VehicleExterior=VehicleExterior;
+            maintainInfos[time].TransmissionBodyCheckField=TransmissionBodyCheckField;
+            maintainInfos[time].EngineNumberField=EngineNumberField;
+            maintainInfos[time].RoadStatusCheck=RoadStatusCheck;
+            maintainInfos[time].FiveOilWaterLightInspectionField=FiveOilWaterLightInspectionField;
+            maintainInfos[time].VehicleEquippedField=VehicleEquippedField;
+            finishEvent(true ,msg.sender);
+     }
+     function getmaintainTime() constant returns(uint[] maintainTime){
+         return maintainTime;
+     }
+     function getBubbleWaterCheckField(uint time) constant returns(string BubbleWaterCheckField){
+         return maintainInfos[time].BubbleWaterCheckField;
+     }
+     function getSteeringWheelBodyCheck(uint time) constant returns(string SteeringWheelBodyCheck ){
+         return maintainInfos[time].SteeringWheelBodyCheck;
+     }
+     function getMotorBodyCheck(uint time) constant returns(string MotorBodyCheck){
+         return maintainInfos[time].MotorBodyCheck;
+     }
+     function getEngineBodyCheckField(uint time) constant returns(string EngineBodyCheckField){
+         return maintainInfos[time].EngineBodyCheckField;
+     }
+     function getVehicleExterior(uint time) constant returns(string VehicleExterior){
+         return maintainInfos[time].VehicleExterior;
+     }
+     function getTransmissionBodyCheckField(uint time) constant returns(string TransmissionBodyCheckField){
+         return maintainInfos[time].TransmissionBodyCheckField;
+     }
+     function getEngineNumberField(uint time) constant returns(string EngineNumberField){
+         return maintainInfos[time].EngineNumberField;
+     }
+     function getRoadStatusCheck(uint time) constant returns(string RoadStatusCheck){
+         return maintainInfos[time].RoadStatusCheck;
+     }
+     function getFiveOilWaterLightInspectionField(uint time) constant returns(string FiveOilWaterLightInspectionField){
+         return maintainInfos[time].FiveOilWaterLightInspectionField;
+     }
+     function getVehicleEquippedField(uint time) constant returns(string VehicleEquippedField){
+         return maintainInfos[time].VehicleEquippedField;
+     }
 }

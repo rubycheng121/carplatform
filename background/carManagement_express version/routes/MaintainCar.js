@@ -54,13 +54,15 @@ router.post('/', function(req, res) {
     for (var i = 0; i < carList.length; i++) {
       if (carList[i] == req.body.carlist) selectedNum = i
     }
-    connection.query({
+    var query =connection.query({
       sql: 'SELECT * FROM carplatform.car_information WHERE CarAddress=? ;',
       timeout: 40000,
       values: [req.body.carlist]
     }, function(error, results, fields) {
-      console.log(connection.sql);
-      console.log(results);
+      console.log(query.sql);
+      // console.log(results);
+      // console.log('hiii');
+      var date = new Date();
       submitCarList(res, JSON.stringify(results), carList, selectedNum, req.body.carlist, JSON.stringify(results[0]))
 
     })

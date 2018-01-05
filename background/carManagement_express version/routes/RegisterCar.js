@@ -47,11 +47,12 @@ router.post('/', function(req, res) {
   var fuelConsumptionH = req.body.FuelConsumptionH
   var fuelConsumptionS = req.body.FuelConsumptionS
   var automotiveBody = req.body.AutomotiveBody
-  var accidentRecord = req.body.AccidentRecord
+  var years = req.body.Year
+  var date = new Date();
+  var accidentRecord = date.toISOString()+':' + req.body.AccidentRecord
   var mileage = req.body.Mileage
   var status = req.body.carStatus
   var salePrice = req.body.SalePrice
-  var years = req.body.Year
   var averageSpeed = 0
   var managerID = req.body.whoami
   const carContract_abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../public/Contracts', ':' + 'carContract' + '.json')))
