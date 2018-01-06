@@ -43,8 +43,8 @@ router.post('/MaintainUser', function(req, res) {
     var AddTime = new Date()
     var managerID = req.body.whoami
 
-    const userContract_abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../public/Contracts', ':' + 'userContract' + '.json')))
-    const userContract_bytecode = '0x' + fs.readFileSync(path.resolve(__dirname, '../public/Contracts', ':' + 'userContract' + '.bin')).toString()
+    const userContract_abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../public/Contracts', '' + 'userContract' + '.json')))
+    const userContract_bytecode = '0x' + fs.readFileSync(path.resolve(__dirname, '../public/Contracts', '' + 'userContract' + '.bin')).toString()
 
     let userContract = web3.eth.contract(userContract_abi);
     // console.log(userID);

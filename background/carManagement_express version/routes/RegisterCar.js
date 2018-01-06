@@ -55,8 +55,8 @@ router.post('/', function(req, res) {
   var salePrice = req.body.SalePrice
   var averageSpeed = 0
   var managerID = req.body.whoami
-  const carContract_abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../public/Contracts', ':' + 'carContract' + '.json')))
-  const carContract_bytecode = '0x' + fs.readFileSync(path.resolve(__dirname, '../public/Contracts', ':' + 'carContract' + '.bin')).toString()
+  const carContract_abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../public/Contracts', '' + 'carContract' + '.json')))
+  const carContract_bytecode = '0x' + fs.readFileSync(path.resolve(__dirname, '../public/Contracts', '' + 'carContract' + '.bin')).toString()
 
   let carContract = web3.eth.contract(carContract_abi);
   let post = {}

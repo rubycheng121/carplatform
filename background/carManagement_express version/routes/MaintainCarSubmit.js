@@ -51,8 +51,8 @@ router.post('/', function(req, res) {
       carList.push(element.CarAddress);
     })
     // console.log(req);
-    const carContract_abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../public/Contracts', ':' + 'carContract' + '.json')))
-    const carContract_bytecode = '0x' + fs.readFileSync(path.resolve(__dirname, '../public/Contracts', ':' + 'carContract' + '.bin')).toString()
+    const carContract_abi = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../public/Contracts', '' + 'carContract' + '.json')))
+    const carContract_bytecode = '0x' + fs.readFileSync(path.resolve(__dirname, '../public/Contracts', '' + 'carContract' + '.bin')).toString()
 
     let carContract = web3.eth.contract(carContract_abi).at(req.body.CarAddress);
 
