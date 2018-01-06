@@ -91,7 +91,7 @@ router.post('/', function(req, res) {
                 var success = event.args.success
                 if (success == true) {
                   let post = {}
-                  post.SerialNumber = req.body..SerialNumber
+                  post.SerialNumber = req.body.SerialNumber
                   post.BubbleWaterCheckField = req.body.BubbleWaterCheckField
                   post.SteeringWheelBodyCheck = req.body.SteeringWheelBodyCheck
                   post.MotorBodyCheck = req.body.MotorBodyCheck
