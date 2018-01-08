@@ -56,7 +56,7 @@ contract carContract {
 
     /* this runs when the contract is executed */
     function carContract(string newSerialNumber,string newLicensePlateNumber,int newOriginalPrice,string newLabel,string newAutomotiveType,string newYears,int newDisplacement,int newFuelConsumptionH
-    ,int newFuelConsumptionS,string newTransmissionSystem,string newAccidentRecord
+    ,int newFuelConsumptionS,string newAutomotiveBody,string newAccidentRecord
     ,int newMileage,int newAverageSpeed,string newUserID,bool newStatus,int newSalePrice ) public {
 
         SerialNumber = newSerialNumber;
@@ -68,7 +68,7 @@ contract carContract {
         Displacement = newDisplacement;
         FuelConsumptionH = newFuelConsumptionH;
         FuelConsumptionS = newFuelConsumptionS;
-        TransmissionSystem = newTransmissionSystem;
+        AutomotiveBody = newAutomotiveBody;
         AccidentRecord = newAccidentRecord;
         Mileage = newMileage;
         AverageSpeed = newAverageSpeed;
@@ -79,6 +79,41 @@ contract carContract {
         // carContractEventOne(newSerialNumber,newLicensePlateNumber,newOriginalPrice,newLabel,newAutomotiveType,newYears_e,newDisplacement,newFuelConsumptionH,newFuelConsumptionS);        //carContractEventone(SerialNumber,LicensePlateNumber,OriginalPrice,Label,AutomotiveType,Years,Displacement,FuelConsumptionH,FuelConsumptionS,TransmissionSystem,AccidentRecord,Mileage,AverageSpeed);
         // carContractEventTwo(newSerialNumber,newTransmissionSystem,newAccidentRecord,newMileage,newAverageSpeed,newUserID,newUserAddress,newStatus);
     }
+
+     function maintainCarInfo (string BubbleWaterCheckField,
+        string SteeringWheelBodyCheck,
+        string MotorBodyCheck,
+        string EngineBodyCheckField,
+        string VehicleExterior,
+        string TransmissionBodyCheckField,
+        string EngineNumberField,
+        string MajorAccidentCheckField,
+        string RoadStatusCheck,
+        string FiveOilWaterLightInspectionField,
+        string VehicleEquippedField) {
+            uint time=now;
+            maintainTime.push(time);
+            maintainInfos[time].BubbleWaterCheckField=BubbleWaterCheckField;
+            maintainInfos[time].SteeringWheelBodyCheck=SteeringWheelBodyCheck;
+            maintainInfos[time].MotorBodyCheck=MotorBodyCheck;
+            maintainInfos[time].EngineBodyCheckField=EngineBodyCheckField;
+            maintainInfos[time].VehicleExterior=VehicleExterior;
+            maintainInfos[time].TransmissionBodyCheckField=TransmissionBodyCheckField;
+            maintainInfos[time].EngineNumberField=EngineNumberField;
+            maintainInfos[time].RoadStatusCheck=RoadStatusCheck;
+            maintainInfos[time].FiveOilWaterLightInspectionField=FiveOilWaterLightInspectionField;
+            maintainInfos[time].VehicleEquippedField=VehicleEquippedField;
+            finishEvent(true ,msg.sender);
+     }
+    function MaintainCarOwnerInfo (string newUserID,string newLicensePlateNumber,int newSalePrice,bool newStatus){
+
+        UserID = newUserID;
+        LicensePlateNumber = newLicensePlateNumber;
+        SalePrice=newSalePrice;
+        Status = newStatus;
+        finishEvent(true,msg.sender);
+
+        }
     function setAutomotiveBody(string newAutomotiveBody){
         AutomotiveBody =newAutomotiveBody;
     }
@@ -200,31 +235,6 @@ contract carContract {
         SalePrice = newSalePrice;
         setSalePriceEvent(newSalePrice);
     }
-     function maintainCarInfo (string BubbleWaterCheckField,
-        string SteeringWheelBodyCheck,
-        string MotorBodyCheck,
-        string EngineBodyCheckField,
-        string VehicleExterior,
-        string TransmissionBodyCheckField,
-        string EngineNumberField,
-        string MajorAccidentCheckField,
-        string RoadStatusCheck,
-        string FiveOilWaterLightInspectionField,
-        string VehicleEquippedField) {
-            uint time=now;
-            maintainTime.push(time);
-            maintainInfos[time].BubbleWaterCheckField=BubbleWaterCheckField;
-            maintainInfos[time].SteeringWheelBodyCheck=SteeringWheelBodyCheck;
-            maintainInfos[time].MotorBodyCheck=MotorBodyCheck;
-            maintainInfos[time].EngineBodyCheckField=EngineBodyCheckField;
-            maintainInfos[time].VehicleExterior=VehicleExterior;
-            maintainInfos[time].TransmissionBodyCheckField=TransmissionBodyCheckField;
-            maintainInfos[time].EngineNumberField=EngineNumberField;
-            maintainInfos[time].RoadStatusCheck=RoadStatusCheck;
-            maintainInfos[time].FiveOilWaterLightInspectionField=FiveOilWaterLightInspectionField;
-            maintainInfos[time].VehicleEquippedField=VehicleEquippedField;
-            finishEvent(true ,msg.sender);
-     }
      function getmaintainTime() constant returns(uint[] maintainTime){
          return maintainTime;
      }

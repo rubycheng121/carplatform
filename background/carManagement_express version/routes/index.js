@@ -68,8 +68,6 @@ router.post('/RegisterUser', function(req, res) {
 
         var post = {
           UserID: userID,
-          BuyerRating: 0,
-          SellerRating: 0,
           Email: email,
           Password: password,
           UserAddress: userContract.address,

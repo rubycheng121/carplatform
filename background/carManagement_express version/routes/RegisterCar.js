@@ -61,8 +61,10 @@ router.post('/', function(req, res) {
   let carContract = web3.eth.contract(carContract_abi);
   let post = {}
 
-  carContract.new(serialNumber, licensePlateNumber, originalPrice, label,
-    automotiveType, years, displacement, fuelConsumptionH, fuelConsumptionS, accidentRecord, mileage, averageSpeed, userID, status, salePrice, {
+
+  carContract.new(serialNumber,licensePlateNumber,originalPrice,label,automotiveType,years,displacement,fuelConsumptionH
+  ,fuelConsumptionS,automotiveBody,accidentRecord
+  ,mileage,averageSpeed,userID,status,salePrice, {
       from: managerID,
       gas: 88888888,
       data: carContract_bytecode
@@ -116,12 +118,12 @@ router.post('/', function(req, res) {
                     connection.end();
                     submitCar(res, error.toString())
                   } else {
-                    carContract.setAutomotiveBody(automotiveBody, {
-                      from: managerID,
-                      gas: 88888888
-                    }, (err, txhash) => {
-
-                    })
+                    // carContract.setAutomotiveBody(automotiveBody, {
+                    //   from: managerID,
+                    //   gas: 88888888
+                    // }, (err, txhash) => {
+                    //
+                    // })
 
                     console.log(query.sql); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
                     connection.end();

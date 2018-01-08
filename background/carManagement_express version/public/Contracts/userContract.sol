@@ -25,15 +25,6 @@ contract userContract{
         userContractEvent(newUserID,0,0,AddTime,Email,Password,this,msg.sender);
     }
 
-    // function carContract() public{
-    //     UserID = 'newUserID';
-    //     BuyerRating = 100;
-    //     SellerRating = 100;
-    //     AddTime = 'newAddTime';
-    //     Email = 'newEmail';
-    //     Password = 'newPassword';
-    //     UserAddress = this;
-    // }
 
     function getUserID() constant returns(string){
         return UserID;

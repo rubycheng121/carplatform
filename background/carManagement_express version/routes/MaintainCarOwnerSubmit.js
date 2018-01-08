@@ -58,13 +58,74 @@ router.post('/', function(req, res) {
 
     let carContract = web3.eth.contract(carContract_abi).at(req.body.CarAddress);
 
+    //maintainCarInfo (string newUserID,string newLicensePlateNumber,int newSalePrice,bool newStatus){
+    let newUserID = req.body.UserID
+    let newLicensePlateNumber = req.body.LicensePlateNumber
+    let newSalePrice = req.body.SalePrice
+    let newStatus = req.body.Status
+    var post = {}
+    post.UserID = newUserID
+    post.LicensePlateNumber = newLicensePlateNumber
+    post.SalePrice = newSalePrice
+    post.Status = newStatus
+    console.log(post);
+    // string newUserID,string newLicensePlateNumber,int newSalePrice,bool newStatus
+    carContract.MaintainCarOwnerInfo(newUserID, newLicensePlateNumber, newSalePrice, newStatus, {
+      from: req.body.whoami,
+      gas: 88888888
+    }, (err, txhash) => {
+      var theEvent = carContract.allEvents({
+        from: req.body.whoami
+      });
+      theEvent.watch(function(err, event) {
+        if (err) {
+          console.log(err);
+          console.log('event watch error');
+          submitCarOwner(res, err, carList, 0, false)
+        } else {
+          if (event.event == 'finishEvent') {
+
+
+            var success = event.args.success
+            if (success == true) {
+              theEvent.stopWatching();
+
+              var connection2 = mysql.createConnection(config);
+              var query = connection2.query('UPDATE car_information SET ?  WHERE ?', [post, {
+                CarAddress: req.body.CarAddress
+              }], function(error, results, fields) {
+                if (error) {
+                  console.log('query error');
+                  console.log(query.sql);
+                  submitCarOwner(res, error, carList, 0, false)
+                } else {
+                  var logStr = '更新：' + '\r\n' +
+                    'CarAddress:' + req.body.CarAddress + '\r\n' +
+                    'UserID:' + post.UserID + '\r\n' +
+                    'SalePrice:' + post.SalePrice + '\r\n' +
+                    'LicensePlateNumber:' + post.LicensePlateNumber + '\r\n' +
+                    'Status:' + post.Status + '\r\n' +''
+                    console.log(logStr);
+                    submitCarOwner(res, logStr, carList, 0, false)
+
+                }
+
+              })
+
+              connection2.end();
+            }
+          }
+        }
+      })
+    })
     // console.log();
     // console.log(results[0].CarAddress);
-    console.log(req.body);
+    // console.log(req.body);
+    // console.log('hi');
 
 
 
-    submitCarOwner(res, ori_Owner, carList, 0, false)
+    // submitCarOwner(res,JSON.stringify(req.body), carList, 0, false)
 
   });
   connection.end();
