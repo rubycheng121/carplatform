@@ -44,7 +44,7 @@
             <li role="presentation" class="active"><a href="/RegisterUser">Register User</a></li>
             <li role="presentation"><a href="/RegisterCar">Register Car</a></li>
             <li role="presentation"><a href="/MaintainCar">Maintain Car</a></li>
-            <li role="presentation"><a href="/MaintainUserInfo">Maintain UserInfo</a></li>
+            <li role="presentation"><a href="/MaintainCarOwner">Maintain Car Owner</a></li>
 
           </ul>
         </div>
@@ -75,7 +75,7 @@
         <form id="main-contact-form" class="contact-form" name="contact-form" method="post" action="/RegisterUser">
           <div class="col-sm-5 col-sm-offset-1">
             <div class="form-group">
-              <label>權限</label>
+              <label>部署者</label>
               <select id="whoami" name="whoami" class="form-control" required="required">
                 <%var options = accounts
                 for ( var i = 0; i < accounts.length; i++ )
