@@ -6,7 +6,7 @@ var connection = require('./lib/db.js');
 router.get('/', function(req, res, next) {
 
 
-	var label = req.query.label; 
+	var label = req.query.label;
 
 	console.log(label);
 
@@ -36,7 +36,7 @@ router.get('/', function(req, res, next) {
 				if (err) {
 					console.log(err);
 				}
-				
+
 				carData = rows;
 
 				//console.log(data[0].Label);
@@ -54,27 +54,40 @@ router.get('/', function(req, res, next) {
 
 			if (err) {
 				console.log(err);
+				res.render('', {
+					data : '',
+					carData : ''
+				});
 			}
-
-			datalength = rows.length;
+			else {datalength = rows.length;
 			data = rows;
 			db.query('SELECT * FROM carplatform.car_label' , function(err, rows) {
 
 				if (err) {
 					console.log(err);
+					res.render('', {
+						data : '',
+						carData : ''
+					});
 				}
-				
+				else{
+								carData = rows;
+								console.log(data[0]);
+								console.log(carData);
+								// console.log(data[0].Label);
 
-				carData = rows;
+								res.render('', {
+									data : data,
+									carData : carData
+								});
 
-				console.log(data[0].Label);
 
-				res.render('', {
-					data : data,
-					carData : carData
-				});
+				}
 
 			});
+
+			}
+
 
 		});
 	}
